@@ -1,6 +1,6 @@
 
 export type Project = {
-  id: number
+  id?: number
   name: string
   active: boolean
   user_name: string

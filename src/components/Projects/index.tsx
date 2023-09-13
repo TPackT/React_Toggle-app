@@ -3,8 +3,7 @@
 import { useState } from 'react'
 import { Project } from '@/types/project'
 import { ProjectList } from '@/components/ProjectList'
-import { updateProject } from '@/clientCalls/projects'
-import { revalidatePath } from 'next/cache'
+import { createProject, updateProject } from '@/clientCalls/projects'
 import { useRouter } from 'next/navigation'
 import { Dialog } from '@/components/Dialog'
 import { ProjectForm } from '@/components/ProjectForm'
@@ -30,10 +29,25 @@ export const Projects = ({ projects }: Props) => {
     }
   }
 
+  const saveProject = async (project: Project) => {
+    if (project.id === undefined) {
+      const res = await createProject(project)
+      if (res.ok) {
+        router.refresh()
+        setEditingProject(undefined)
+      }
+    } else {
+      const res = await updateProject(project)
+      if (res.ok) {
+        router.refresh()
+        setEditingProject(undefined)
+      }
+    }
+  }
   return (
    <>
      <Dialog open={editingProject !==undefined} close={() => setEditingProject(undefined)}>
-       {editingProject !== undefined && <ProjectForm initialValues={editingProject} onSave={() => {}} onCancel={() => setEditingProject(undefined)} />}
+       {editingProject !== undefined && <ProjectForm initialValues={editingProject} onSave={saveProject} onCancel={() => setEditingProject(undefined)} />}
      </Dialog>
 
      <ProjectList projects={projects} onSelect={selectProject} onToggle={toggleProject} />
