@@ -4,7 +4,10 @@ import { generateUrl } from '@/helpers/generate_url'
 import { NextResponse } from 'next/server'
 
 export async function GET() {
-  return await getAllProjects()
+  const res = await getAllProjects()
+
+  const data = await res.json()
+  return NextResponse.json({ data })
 }
 
 export async function POST(request: Request) {

@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { Input } from '@/components/Input'
 import { formatDate } from '@/helpers/formatDate'
 import { createTE } from '@/clientCalls/timeEntries'
+import { ProjectSelector } from '@/components/ProjectSelector'
 
 const initValue: TimeEntry = {
   end: '',
@@ -32,11 +33,17 @@ export const TimeForm = () => {
     const {name, value} = e.target
     setTimeEntry({ ...timeEntry, [name]: value})
   }
+
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const {name, value} = e.target
+    setTimeEntry({ ...timeEntry, [name]: value})
+  }
   return (
     <form className="flex flex-wrap items-end">
       <Input label="Task" name="task" value={timeEntry.task} onChange={handleChange} />
       <Input label="Start" name="start" value={timeEntry.start} onChange={handleChange} type="datetime-local" />
       <Input label="End" name="end" value={timeEntry.end} onChange={handleChange} type="datetime-local" />
+      <ProjectSelector name="project_id" value={timeEntry.project_id} handleChange={handleSelectChange} />
       {timeEntry.start && (
         <button
           className="btn btn-neutral"
