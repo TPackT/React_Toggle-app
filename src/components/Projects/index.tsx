@@ -7,6 +7,7 @@ import { updateProject } from '@/clientCalls/projects'
 import { revalidatePath } from 'next/cache'
 import { useRouter } from 'next/navigation'
 import { Dialog } from '@/components/Dialog'
+import { ProjectForm } from '@/components/ProjectForm'
 
 
 type Props = {
@@ -32,7 +33,7 @@ export const Projects = ({ projects }: Props) => {
   return (
    <>
      <Dialog open={editingProject !==undefined} close={() => setEditingProject(undefined)}>
-       <p>{JSON.stringify(editingProject)}</p>
+       {editingProject !== undefined && <ProjectForm initialValues={editingProject} onSave={() => {}} onCancel={() => setEditingProject(undefined)} />}
      </Dialog>
 
      <ProjectList projects={projects} onSelect={selectProject} onToggle={toggleProject} />
