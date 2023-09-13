@@ -6,6 +6,7 @@ import { ProjectList } from '@/components/ProjectList'
 import { updateProject } from '@/clientCalls/projects'
 import { revalidatePath } from 'next/cache'
 import { useRouter } from 'next/navigation'
+import { Dialog } from '@/components/Dialog'
 
 
 type Props = {
@@ -30,7 +31,9 @@ export const Projects = ({ projects }: Props) => {
 
   return (
    <>
-     {JSON.stringify(editingProject)}
+     <Dialog open={editingProject !==undefined} close={() => setEditingProject(undefined)}>
+       <p>{JSON.stringify(editingProject)}</p>
+     </Dialog>
 
      <ProjectList projects={projects} onSelect={selectProject} onToggle={toggleProject} />
    </>
