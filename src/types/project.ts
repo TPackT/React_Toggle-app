@@ -5,3 +5,7 @@ export type Project = {
   active: boolean
   user_name: string
 }
+
+export type FetchedProjects = {
+  data: Project[]
+}

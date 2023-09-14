@@ -49,7 +49,7 @@ export const Projects = ({ projects }: Props) => {
      <Dialog open={editingProject !==undefined} close={() => setEditingProject(undefined)}>
        {editingProject !== undefined && <ProjectForm initialValues={editingProject} onSave={saveProject} onCancel={() => setEditingProject(undefined)} />}
      </Dialog>
-     <button className="btn-neutral" onClick={() => setEditingProject({id: undefined, name: '', active: true, user_name: process.env.NEXT_PUBLIC_USERNAME})}>New</button>
+     <button className="btn-neutral" onClick={() => setEditingProject({id: undefined, name: '', active: true, user_name: process.env.NEXT_PUBLIC_USERNAME!})}>New</button>
      <ProjectList projects={projects} onSelect={selectProject} onToggle={toggleProject} />
    </>
   )

@@ -27,10 +27,10 @@ return (
             <td>{project.user_name}</td>
             <th>
               <button className="btn btn-neutral btn-sm mr-4"
-              onClick={onSelect(project.id)}
+              onClick={onSelect(project.id!)}
               >edit</button>
               <button className="btn btn-primary btn-sm"
-                onClick={onToggle(project.id)}
+                onClick={onToggle(project.id!)}
               >toggle</button>
             </th>
           </tr>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getAllProjects } from '@/clientCalls/projects'
+import { FetchedProjects, Project } from '@/types/project'
 
 type Props = {
   name: string
@@ -8,11 +9,11 @@ type Props = {
 }
 
 export const ProjectSelector = ({name, value, handleChange}: Props) => {
-  const [projects, setProjects] = useState([])
+  const [projects, setProjects] = useState<Project[]>([])
   useEffect(() => {
     getAllProjects()
       .then((response) => response.json())
-      .then(data => setProjects(data.data.filter((item) => item.active === true)))
+      .then((data: FetchedProjects) => setProjects(data.data.filter((item) => item.active)))
   }, [])
 
   return (
@@ -20,7 +21,7 @@ export const ProjectSelector = ({name, value, handleChange}: Props) => {
             className="select select-bordered w-full max-w-xs"
             >
       {projects.map((p) => (
-        <option key={p.id} value={p.id}>{p.name}</option>
+        <option key={p.id!} value={p.id!}>{p.name}</option>
       ))}
     </select>
   )

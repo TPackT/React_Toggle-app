@@ -12,7 +12,7 @@ const initValue: TimeEntry = {
   start: '',
   task: '',
   project_id: 4,
-  user_name: process.env.NEXT_PUBLIC_USERNAME
+  user_name: process.env.NEXT_PUBLIC_USERNAME!
 }
 
 export const TimeForm = () => {
