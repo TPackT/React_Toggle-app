@@ -1,10 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  async headers() {
-    return [
-      { key: 'Access-Control-Allow-Origin', value: 'https://*.vercel.app' }
-    ]
-  }
-}
+const nextConfig = {}
 
 module.exports = nextConfig
