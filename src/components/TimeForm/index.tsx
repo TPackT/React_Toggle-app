@@ -40,21 +40,46 @@ export const TimeForm = () => {
   }
   return (
     <form className="flex flex-wrap items-end">
-      <Input label="Task" name="task" value={timeEntry.task} onChange={handleChange} />
-      <Input label="Start" name="start" value={timeEntry.start} onChange={handleChange} type="datetime-local" />
-      <Input label="End" name="end" value={timeEntry.end} onChange={handleChange} type="datetime-local" />
-      <ProjectSelector name="project_id" value={timeEntry.project_id} handleChange={handleSelectChange} />
+      <Input 
+        label="Task" 
+        name="task" 
+        value={timeEntry.task} 
+        onChange={handleChange} 
+      />
+      <Input 
+        label="Start" 
+        name="start" 
+        value={timeEntry.start} 
+        onChange={handleChange} 
+        type="datetime-local" 
+      />
+      <Input 
+        label="End" 
+        name="end" 
+        value={timeEntry.end} 
+        onChange={handleChange} 
+        type="datetime-local" 
+      />
+      <ProjectSelector 
+        get
+        name="project_id" 
+        value={timeEntry.project_id} 
+      handleChange={handleSelectChange} 
+      />
       {timeEntry.start && (
         <button
           className="btn btn-neutral"
           disabled={timeEntry.end !== ''}
-          onClick={() => {setTimeEntry({...timeEntry, end: formatDate(new Date())})}}
-        >Stop</button>
+          onClick={() => {
+            setTimeEntry({...timeEntry, end: formatDate(new Date())})}}
+        >Stop
+        </button>
       )}
       {!timeEntry.start && (
         <button
           className="btn btn-neutral"
-          onClick={() => {setTimeEntry({...timeEntry, start: formatDate(new Date())})}}
+          onClick={() => {
+            setTimeEntry({...timeEntry, start: formatDate(new Date())})}}
         >Start</button>
       )}
     </form>

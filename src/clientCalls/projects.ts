@@ -8,6 +8,7 @@ export const getAllProjects = async () => {
   })
 }
 
+
 export const createProject = async (project: Project) => {
   return await fetch(generateLocalUrl('/projects'), {
     method: 'POST',

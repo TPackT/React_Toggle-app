@@ -15,6 +15,7 @@ type Props = {
 
 export const Projects = ({ projects }: Props) => {
   const [editingProject, setEditingProject] = useState<Project | undefined>(undefined)
+  const [filterCriteria, setFilterCriteria] = useState<string>("")
   const router = useRouter()
 
   const selectProject = (id: number) => () => {
@@ -28,6 +29,21 @@ export const Projects = ({ projects }: Props) => {
       router.refresh()
     }
   }
+
+  /*
+  const filterProjects = (criteria: string) => {
+    setFilterCriteria(criteria);
+  }
+
+  const filterProjects = () => {
+    const filteredProjects = projects.filter((project) => {
+      const userName = project.user_name.toLowerCase();
+      const filterValue = filterCriteria.toLowerCase();
+      return userName.includes(filterValue);
+    })
+    return filteredProjects
+  }
+  */
 
   const saveProject = async (project: Project) => {
     if (project.id === undefined) {
@@ -46,11 +62,33 @@ export const Projects = ({ projects }: Props) => {
   }
   return (
    <>
-     <Dialog open={editingProject !==undefined} close={() => setEditingProject(undefined)}>
-       {editingProject !== undefined && <ProjectForm initialValues={editingProject} onSave={saveProject} onCancel={() => setEditingProject(undefined)} />}
+     <Dialog 
+     open={editingProject !==undefined} 
+     close={() => setEditingProject(undefined)}
+     >
+       
+       {editingProject !== undefined && 
+       <ProjectForm 
+       initialValues={editingProject} 
+       onSave={saveProject} 
+       onCancel={() => setEditingProject(undefined)} 
+       />}
      </Dialog>
-     <button className="btn-neutral" onClick={() => setEditingProject({id: undefined, name: '', active: true, user_name: process.env.NEXT_PUBLIC_USERNAME!})}>New</button>
-     <ProjectList projects={projects} onSelect={selectProject} onToggle={toggleProject} />
+
+     <button 
+     className="btn-neutral" 
+     onClick={() => 
+     setEditingProject({
+      id: undefined, 
+      name: '', 
+      active: true, 
+      user_name: process.env.NEXT_PUBLIC_USERNAME!})}>New</button>
+
+      
+     <ProjectList 
+     projects={projects} 
+     onSelect={selectProject} 
+     onToggle={toggleProject} />
    </>
   )
 }

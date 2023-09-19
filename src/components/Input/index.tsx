@@ -7,7 +7,13 @@ type TextInputProps = {
   placeholder?: string
 }
 
-export const Input = ({ type = 'text', label, name, value, onChange, placeholder }: TextInputProps) => {
+export const Input = ({ 
+  type = 'text', 
+  label, 
+  name, 
+  value, 
+  onChange, 
+  placeholder }: TextInputProps) => {
   return (
     <div className="form-control">
       <label className="label">

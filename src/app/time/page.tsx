@@ -1,5 +1,6 @@
 import { TimeForm } from '@/components/TimeForm'
 import { getAllTEs } from '@/serverCalls/timeEntries'
+import { TimeEntries } from '@/components/TimeEntries'
 
 async function getData() {
   const res = await getAllTEs()
@@ -13,9 +14,9 @@ export default async function Page() {
   const data = await getData()
   return (
     <>
-    <h1>Time</h1>
-    <TimeForm />
-      {JSON.stringify(data)}
+      <h1>Time</h1>
+      <TimeForm/>
+      <TimeEntries timeEntries={data}/>
     </>
   )
 }
